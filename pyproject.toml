@@ -1,0 +1,15 @@
+[project]
+name = "personal-knowledge-mine"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = "~=3.10"
+dependencies = [
+  "langchain",
+  "langchain_community",
+  "langchain-ollama",
+  "langchain-mlx-whisper-parser@git+https://github.com/floscha/langchain-mlx-whisper-parser",
+  "lightcast@git+https://github.com/floscha/lightcast",
+  "faiss-cpu",
+  "yt_dlp",
+]
