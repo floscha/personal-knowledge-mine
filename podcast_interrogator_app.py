@@ -2,7 +2,7 @@ import streamlit as st
 from lightcast import search_podcasts
 from langchain.chains import RetrievalQA
 from langchain_community.document_loaders.generic import GenericLoader
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import InMemoryVectorStore
 from langchain_ollama import OllamaEmbeddings, OllamaLLM
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_mlx_whisper_parser import MlxWhisperParser
@@ -29,7 +29,7 @@ splits = text_splitter.split_text(text)
 
 # Build an index
 embeddings = OllamaEmbeddings(model="llama3.2")
-vectordb = FAISS.from_texts(splits, embeddings)
+vectordb = InMemoryVectorStore.from_texts(splits, embeddings)
 # Build a QA chain
 qa_chain = RetrievalQA.from_chain_type(
     llm=OllamaLLM(model="llama3.2"),

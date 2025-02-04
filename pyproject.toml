@@ -10,7 +10,6 @@ dependencies = [
   "langchain-ollama",
   "langchain-mlx-whisper-parser@git+https://github.com/floscha/langchain-mlx-whisper-parser",
   "lightcast@git+https://github.com/floscha/lightcast",
-  "faiss-cpu",
   "yt_dlp",
   "streamlit>=1.42.0",
 ]
