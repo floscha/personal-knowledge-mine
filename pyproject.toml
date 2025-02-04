@@ -12,4 +12,5 @@ dependencies = [
   "lightcast@git+https://github.com/floscha/lightcast",
   "faiss-cpu",
   "yt_dlp",
+  "streamlit>=1.42.0",
 ]
