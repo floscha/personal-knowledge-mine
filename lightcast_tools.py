@@ -4,12 +4,15 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 import lightcast
 from langchain_core.tools import tool
 
+# class PodcastNotFoundException
 
 @tool
 def find_podcast(search_query: str) -> dict:
     "Returns the length of a word."
-    res = lightcast.search_podcasts(search_query)[0]
-    return res.__dict__
+    search_results = lightcast.search_podcasts(search_query)
+    if len(search_results) > 0:
+        return search_results[0].__dict__
+    return {}
 
 
 @tool
