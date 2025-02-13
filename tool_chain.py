@@ -13,7 +13,7 @@ class ToolCallRequest(TypedDict):
     arguments: dict[str, Any]
     
 
-def build_tool_chain(tools: list[BaseTool], model):
+def create_tool_chain(tools: list[BaseTool], model):
     rendered_tools = render_text_description(tools)
     system_prompt = f"""
         You are an assistant that has access to the following set of tools. 

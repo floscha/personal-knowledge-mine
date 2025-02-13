@@ -6,13 +6,13 @@ from langchain_ollama import ChatOllama, OllamaLLM
 
 from lightcast_tools import find_podcast, list_podcast_episodes
 from podcast_audio_loader import PodcastAudioLoader
-from tool_chain import build_tool_chain
+from tool_chain import create_tool_chain
 
 
 tools = [find_podcast, list_podcast_episodes]
 model = ChatOllama(model="llama3.2")
 
-chain = build_tool_chain(tools, model)
+chain = create_tool_chain(tools, model)
 # TODO: Check why this translates to {'search_query': 'Jagtenå p¥ det eviga liv'}
 # foo = chain.invoke({"input": "Search for the Jagten på det evige liv podcast"})
 
