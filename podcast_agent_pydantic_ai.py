@@ -15,12 +15,12 @@ agent = Agent(
 )
 
 @agent.tool
-async def search_podcast(ctx: RunContext, query: str) -> str:
+async def search_podcast(_: RunContext, query: str) -> str:
     """Search podcasts based on the given query.
 
     Args:
         ctx: The context.
-        location_description: A textual query to search podcasts based upon.
+        query: A textual query to search podcasts based upon.
     """
     return lightcast.search_podcasts(query)[0].name
 
