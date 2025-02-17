@@ -12,4 +12,5 @@ dependencies = [
   "lightcast@git+https://github.com/floscha/lightcast",
   "yt_dlp",
   "streamlit>=1.42.0",
+  "pydantic-ai>=0.0.24",
 ]
