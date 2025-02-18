@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Iterable, List
 
 from langchain_community.document_loaders.blob_loaders import FileSystemBlobLoader
@@ -12,6 +13,7 @@ class PodcastAudioLoader(BlobLoader):
             raise TypeError("urls must be a list")
 
         self.urls = urls
+        Path(save_dir).mkdir(parents=True, exist_ok=True)
         self.save_dir = save_dir
 
     def yield_blobs(self) -> Iterable[Blob]:
