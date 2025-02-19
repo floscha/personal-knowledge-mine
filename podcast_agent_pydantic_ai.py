@@ -10,9 +10,12 @@ ollama_model = OpenAIModel(
 agent = Agent(
     model=ollama_model,
     system_prompt=(
-        "Reply in one concise sentence."
-        "Use the `search_podcast` tool to find the most relevant result."),
+        "Use the `search_podcast` tool retrieve a list of podcasts together with their feed url from which a full list of episodes can be retrieved."
+        "Then, use the `get_episodes` tool to get the full list of episodes for the most relevant podcast from the list above."
+        "Finally, print the title of the 5 most relevant episodes."
+    ),
 )
+
 
 @agent.tool
 async def search_podcast(_: RunContext, query: str) -> str:
@@ -22,9 +25,26 @@ async def search_podcast(_: RunContext, query: str) -> str:
         ctx: The context.
         query: A textual query to search podcasts based upon.
     """
-    return lightcast.search_podcasts(query)[0].name
+    return "\n".join(
+        f"{e.name} ({e.feed_url})" for e in lightcast.search_podcasts(query)[:10]
+    )
 
 
-result = agent.run_sync("Huberman Lab")
+@agent.tool
+async def get_episodes(_: RunContext, feed_url: str) -> str:
+    """Search podcasts based on the given query.
+
+    Args:
+        ctx: The context.
+        query: The feed url of the podcast for which to get all episodes.
+    """
+
+    return "\n".join(
+        f"{e.title} ({e.audio_url})"
+        for e in lightcast.core.get_episodes_from_feed_url(feed_url)
+    )
+
+
+result = agent.run_sync("Find all episodes of the Huberman Lab podcast")
 print(result.data)
-print("\n", result.usage())
+# print("\n", result.usage())
